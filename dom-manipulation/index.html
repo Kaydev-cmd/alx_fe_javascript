@@ -28,6 +28,14 @@
           <button onclick="addQuotes()" type="button">Add Quote</button>
         </div>
       </form>
+      <input
+        type="file"
+        id="importFile"
+        accept=".json"
+        onchange="importFromJsonFile(event)"
+        placeholder="Upload a JSON file"
+      />
+      <button id="exportJSON">Export</button>
     </div>
     <script src="script.js"></script>
   </body>
