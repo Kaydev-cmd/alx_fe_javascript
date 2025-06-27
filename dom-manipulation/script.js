@@ -21,6 +21,20 @@ const qoutes = [
   },
 ];
 
-const showRandomQuote = () => {};
+const showQuoteBtn = document.getElementById("newQuote");
+const quoteDisplay = document.getElementById("quoteDisplay");
 
-const createAddQuoteForm = () => {};
+const showRandomQuote = () => {
+  showQuoteBtn.addEventListener("click", () => {
+    const randomQoute = qoutes[Math.floor(Math.random() * qoutes.length)];
+
+    quoteDisplay.innerText = `Quote: ${randomQoute.text}
+     Category: ${randomQoute.category}`;
+  });
+}; // Displays the random qoute
+
+showRandomQuote();
+
+const createAddQuoteForm = () => {}; // Displays a pop up that allows users to add a qoute
+
+const addQuotes = () => {}; // Adds the qoute
