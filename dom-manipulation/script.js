@@ -79,7 +79,7 @@ const addQuotes = () => {
     alert("Please enter both the quote and category");
   }
 
-  console.log(quotes);
+  filterQuotes();
 }; // Adds a new qoute
 
 const importFromJsonFile = (event) => {
@@ -133,3 +133,27 @@ const populateCategories = () => {
 }; // This populates the select element with quote categories
 
 window.addEventListener("DOMContentLoaded", () => populateCategories());
+
+const filterQuotes = () => {
+  const selectedCategory = document.getElementById("categoryFilter").value;
+  const quoteDisplay = document.getElementById("quoteDisplay");
+
+  quoteDisplay.innerHTML = "";
+
+  const filteredQuotes = selectedCategory
+    ? quotes.filter((quote) => quote.category === selectedCategory)
+    : quotes;
+
+  if (filteredQuotes.length === 0) {
+    quoteDisplay.innerText = `No quotes found for this category.`;
+    return;
+  }
+
+  filteredQuotes.forEach((quote) => {
+    const quoteElement = document.createElement("p");
+    quoteElement.innerText = `Quote: ${quote.text} \nCategory: ${quote.category}`;
+    quoteDisplay.appendChild(quoteElement);
+  });
+}; // This updates the displayed quotes based on the selected category
+
+filterQuotes();
