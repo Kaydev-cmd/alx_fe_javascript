@@ -9,6 +9,14 @@
   </head>
   <body>
     <div class="wrapper">
+      <select
+        id="categoryFilter"
+        onchange="filterQuotes()"
+        name="Filter"
+        title="Filter"
+      >
+        <option value="all">All Categories</option>
+      </select>
       <h1>Dynamic Quote Generator</h1>
       <div id="quoteDisplay"></div>
       <button id="newQuote">Show New Quote</button>
@@ -28,14 +36,16 @@
           <button onclick="addQuotes()" type="button">Add Quote</button>
         </div>
       </form>
-      <input
-        type="file"
-        id="importFile"
-        accept=".json"
-        onchange="importFromJsonFile(event)"
-        placeholder="Upload a JSON file"
-      />
-      <button id="exportJSON">Export Quotes</button>
+      <div class="export">
+        <input
+          type="file"
+          id="importFile"
+          accept=".json"
+          onchange="importFromJsonFile(event)"
+          placeholder="Upload a JSON file"
+        />
+        <button id="exportJSON">Export Quotes</button>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
