@@ -1,4 +1,4 @@
-const quotes = [
+const quotes = JSON.parse(localStorage.getItem("quotes")) || [
   {
     text: "The journey doesn’t begin when you're ready—it begins when you start.",
     category: "Motivation",
@@ -47,6 +47,8 @@ const addQuotes = () => {
   if (text && category) {
     const newQuote = { text, category };
     quotes.push(newQuote);
+
+    localStorage.setItem("quotes", JSON.stringify(quotes));
 
     quoteDisplay.innerText = `Quote: ${newQuote.text} \nCategory: ${newQuote.category}`;
 
