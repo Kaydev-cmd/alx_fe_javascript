@@ -63,7 +63,6 @@ const addQuotes = () => {
   if (text && category) {
     const newQuote = { text, category };
     quotes.push(newQuote);
-
     // localStorage.setItem("quotes", JSON.stringify(quotes));
 
     saveQuotes();
@@ -71,10 +70,24 @@ const addQuotes = () => {
     quoteDisplay.innerText = `Quote: ${newQuote.text} \nCategory: ${newQuote.category}`;
     sessionStorage.setItem("lastQuote", JSON.stringify(newQuote));
 
-    alert("Quote Added!");
+    const exists = [...categoryFilter.options].some(
+      (option) => option.value.toLowerCase() === category.toLowerCase()
+    );
 
+    if (!exists) {
+      const newOption = document.createElement("option");
+      newOption.value = category;
+      newOption.textContent = category;
+      categoryFilter.appendChild(newOption);
+    }
+
+    alert("Quote Added!");
     textInput.value = "";
     categoryInput.value = "";
+
+    categoryFilter.value = category;
+    localStorage.setItem("lastSelectedCategory", category);
+    filterQuotes();
   } else {
     alert("Please enter both the quote and category");
   }
@@ -124,6 +137,8 @@ document
 const populateCategories = () => {
   const uniqueCategories = [...new Set(quotes.map((quote) => quote.category))];
   const savedCategory = localStorage.getItem("lastSelectedCategory");
+
+  categoryFilter.innerHTML = `<option value="all">All Categories</option>`;
 
   uniqueCategories.forEach((category) => {
     const option = document.createElement("option");
