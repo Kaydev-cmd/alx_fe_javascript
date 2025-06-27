@@ -24,12 +24,23 @@ const quotes = JSON.parse(localStorage.getItem("quotes")) || [
 const showQuotesBtn = document.getElementById("newQuote");
 const quoteDisplay = document.getElementById("quoteDisplay");
 
+window.addEventListener("DOMContentLoaded", () => {
+  const lastQuote = sessionStorage.getItem("lastQuote");
+  if (lastQuote) {
+    const parsed = JSON.parse(lastQuote);
+    quoteDisplay.innerHTML = `Quote: ${parsed.text} <br/>
+     Category: ${parsed.category}`;
+  }
+}); // This loads the last viewed quote from sessionStorage if it exists
+
 const showRandomQuote = () => {
   showQuotesBtn.addEventListener("click", () => {
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
     quoteDisplay.innerHTML = `Quote: ${randomQuote.text} <br/>
      Category: ${randomQuote.category}`;
+
+    sessionStorage.setItem("lastQuote", JSON.stringify(randomQuote));
   });
 }; // Displays the random qoute
 
@@ -51,6 +62,7 @@ const addQuotes = () => {
     localStorage.setItem("quotes", JSON.stringify(quotes));
 
     quoteDisplay.innerText = `Quote: ${newQuote.text} \nCategory: ${newQuote.category}`;
+    sessionStorage.setItem("lastQuote", JSON.stringify(newQuote));
 
     alert("Quote Added!");
 
