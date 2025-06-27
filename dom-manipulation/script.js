@@ -48,6 +48,10 @@ showRandomQuote();
 
 const createAddQuoteForm = () => {}; // Has to create form
 
+const saveQuotes = () => {
+  localStorage.setItem("quotes", JSON.stringify(quotes));
+};
+
 const addQuotes = () => {
   const textInput = document.getElementById("newQuoteText");
   const categoryInput = document.getElementById("newQuoteCategory");
@@ -59,7 +63,9 @@ const addQuotes = () => {
     const newQuote = { text, category };
     quotes.push(newQuote);
 
-    localStorage.setItem("quotes", JSON.stringify(quotes));
+    // localStorage.setItem("quotes", JSON.stringify(quotes));
+
+    saveQuotes();
 
     quoteDisplay.innerText = `Quote: ${newQuote.text} \nCategory: ${newQuote.category}`;
     sessionStorage.setItem("lastQuote", JSON.stringify(newQuote));
@@ -74,3 +80,42 @@ const addQuotes = () => {
 
   console.log(quotes);
 }; // Adds a new qoute
+
+const importFromJsonFile = (event) => {
+  const fileReader = new FileReader();
+  fileReader.onload = (event) => {
+    try {
+      const importedQuotes = JSON.parse(event.target.result);
+      if (Array.isArray(importedQuotes)) {
+        quotes.push(...importedQuotes);
+        saveQuotes();
+        alert(`Quotes imported successfully!`);
+      } else {
+        alert(`Invalid file format: JSON should be an array of quotes.`);
+      }
+    } catch (err) {
+      alert(`Failed to parse JSON file. Please check the file format.`);
+    }
+  };
+  fileReader.readAsText(event.target.files[0]);
+};
+
+const exportToJsonFile = () => {
+  const dataStr = JSON.stringify(quotes, null, 2);
+  const blob = new Blob([dataStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = "quotes_export.json";
+
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+
+  URL.revokeObjectURL(url);
+}; // Exports quotes to JSON file
+
+document
+  .getElementById("exportJSON")
+  .addEventListener("click", exportToJsonFile);
