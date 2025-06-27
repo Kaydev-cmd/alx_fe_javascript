@@ -5,23 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dynamic Quote Generator</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="globals.css" />
   </head>
   <body>
-    <h1>Dynamic Quote Generator</h1>
-    <div id="quoteDisplay"></div>
-    <button id="newQuote">Show New Quote</button>
-    <script src="script.js"></script>
+    <div class="wrapper">
+      <h1>Dynamic Quote Generator</h1>
+      <div id="quoteDisplay"></div>
+      <button id="newQuote">Show New Quote</button>
 
-    <form>
-      <div>
-        <input type="text" id="newQuoteText" placeholder="Enter a new quote" />
-        <input
-          type="text"
-          id="newQuoteCategory"
-          placeholder="Enter quote category"
-        />
-        <button onclick="addQuote()" type="button">Add Quote</button>
-      </div>
-    </form>
+      <form>
+        <div>
+          <input
+            type="text"
+            id="newQuoteText"
+            placeholder="Enter a new quote"
+          />
+          <input
+            type="text"
+            id="newQuoteCategory"
+            placeholder="Enter quote category"
+          />
+          <button onclick="addQuote()" type="button">Add Quote</button>
+        </div>
+      </form>
+    </div>
+    <script src="script.js"></script>
   </body>
 </html>
