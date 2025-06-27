@@ -35,7 +35,7 @@ const showRandomQuote = () => {
 
 showRandomQuote();
 
-const addQuote = () => {
+const createAddQuoteForm = () => {
   const textInput = document.getElementById("newQuoteText");
   const categoryInput = document.getElementById("newQuoteCategory");
 
