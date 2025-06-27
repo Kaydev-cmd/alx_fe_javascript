@@ -11,6 +11,11 @@
   margin: 16px 0;
 }
 
+.export {
+  display: flex;
+  align-items: center;
+}
+
 #quoteDisplay {
   margin-bottom: 16px;
   font-size: 18px;
@@ -20,7 +25,8 @@ h1 {
   font-size: 48px;
 }
 
-button {
+button,
+select {
   background-color: blue;
   color: #fff;
   padding: 12px 16px;
