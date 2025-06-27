@@ -54,3 +54,23 @@ const createAddQuoteForm = () => {
 
   console.log(quotes);
 }; // Adds a new qoute
+
+const addQuotes = () => {
+  const textInput = document.getElementById("newQuoteText");
+  const categoryInput = document.getElementById("newQuoteCategory");
+
+  const text = textInput.value.trim();
+  const category = categoryInput.value.trim();
+
+  if (text && category) {
+    quotes.push({ text, category });
+    alert("Quote Added!");
+
+    textInput.value = "";
+    categoryInput.value = "";
+  } else {
+    alert("Please enter both the quote and category");
+  }
+
+  console.log(quotes);
+}; // Adds a new qoute
