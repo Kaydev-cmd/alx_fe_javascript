@@ -24,16 +24,16 @@ const quotes = [
 const showQuotesBtn = document.getElementById("newQuote");
 const quoteDisplay = document.getElementById("quoteDisplay");
 
-const displayRandomQuote = () => {
+const showRandomQuote = () => {
   showQuotesBtn.addEventListener("click", () => {
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
-    quoteDisplay.innerText = `Quote: ${randomQuote.text}
+    quoteDisplay.innerHTML = `Quote: ${randomQuote.text} <br/>
      Category: ${randomQuote.category}`;
   });
 }; // Displays the random qoute
 
-displayRandomQuote();
+showRandomQuote();
 
 const addQuote = () => {
   const textInput = document.getElementById("newQuoteText");
