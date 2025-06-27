@@ -123,6 +123,7 @@ document
 
 const populateCategories = () => {
   const uniqueCategories = [...new Set(quotes.map((quote) => quote.category))];
+  const savedCategory = localStorage.getItem("lastSelectedCategory");
 
   uniqueCategories.forEach((category) => {
     const option = document.createElement("option");
@@ -130,14 +131,24 @@ const populateCategories = () => {
     option.textContent = category;
     categoryFilter.appendChild(option);
   });
-}; // This populates the select element with quote categories
+
+  if (
+    savedCategory &&
+    document.querySelector(`#categoryFilter option[value="${savedCategory}"]`)
+  ) {
+    categoryFilter.value = savedCategory;
+  } else {
+    categoryFilter.value = "all";
+  }
+}; // This populates the select element with quote categories and sets the previously selected value
 
 window.addEventListener("DOMContentLoaded", () => populateCategories());
 
 const filterQuotes = () => {
   const selectedCategory = document.getElementById("categoryFilter").value;
-  const quoteDisplay = document.getElementById("quoteDisplay");
+  localStorage.setItem("lastSelectedCategory", selectedCategory);
 
+  const quoteDisplay = document.getElementById("quoteDisplay");
   quoteDisplay.innerHTML = "";
 
   const filteredQuotes = selectedCategory
@@ -154,6 +165,6 @@ const filterQuotes = () => {
     quoteElement.innerText = `Quote: ${quote.text} \nCategory: ${quote.category}`;
     quoteDisplay.appendChild(quoteElement);
   });
-}; // This updates the displayed quotes based on the selected category
+}; // This updates the displayed quotes based on the selected category and stores the last selected category
 
 filterQuotes();
