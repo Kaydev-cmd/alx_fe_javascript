@@ -17,8 +17,13 @@
 }
 
 #quoteDisplay {
-  margin-bottom: 16px;
+  margin: 16px 0;
   font-size: 18px;
+}
+
+#quoteDisplay p {
+  margin: 16px 0;
+  line-height: 26px;
 }
 
 h1 {
@@ -34,6 +39,10 @@ select {
   cursor: pointer;
   transition: all 0.3 ease-in-out;
   border: none;
+}
+
+select {
+  margin-bottom: 16px;
 }
 
 input {
