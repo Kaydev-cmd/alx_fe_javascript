@@ -23,6 +23,7 @@ const quotes = JSON.parse(localStorage.getItem("quotes")) || [
 
 const showQuotesBtn = document.getElementById("newQuote");
 const quoteDisplay = document.getElementById("quoteDisplay");
+const categoryFilter = document.getElementById("categoryFilter");
 
 window.addEventListener("DOMContentLoaded", () => {
   const lastQuote = sessionStorage.getItem("lastQuote");
@@ -98,7 +99,7 @@ const importFromJsonFile = (event) => {
     }
   };
   fileReader.readAsText(event.target.files[0]);
-};
+}; // Imports quotes to JSON file
 
 const exportToJsonFile = () => {
   const dataStr = JSON.stringify(quotes, null, 2);
@@ -119,3 +120,16 @@ const exportToJsonFile = () => {
 document
   .getElementById("exportJSON")
   .addEventListener("click", exportToJsonFile);
+
+const populateCategories = () => {
+  const uniqueCategories = [...new Set(quotes.map((quote) => quote.category))];
+
+  uniqueCategories.forEach((category) => {
+    const option = document.createElement("option");
+    option.value = category;
+    option.textContent = category;
+    categoryFilter.appendChild(option);
+  });
+}; // This populates the select element with quote categories
+
+window.addEventListener("DOMContentLoaded", () => populateCategories());
