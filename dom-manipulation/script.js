@@ -1,4 +1,4 @@
-const qoutes = [
+const quotes = [
   {
     text: "The journey doesn’t begin when you're ready—it begins when you start.",
     category: "Motivation",
@@ -21,20 +21,36 @@ const qoutes = [
   },
 ];
 
-const showQuoteBtn = document.getElementById("newQuote");
+const showQuotesBtn = document.getElementById("newQuote");
 const quoteDisplay = document.getElementById("quoteDisplay");
 
 const showRandomQuote = () => {
-  showQuoteBtn.addEventListener("click", () => {
-    const randomQoute = qoutes[Math.floor(Math.random() * qoutes.length)];
+  showQuotesBtn.addEventListener("click", () => {
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
-    quoteDisplay.innerText = `Quote: ${randomQoute.text}
-     Category: ${randomQoute.category}`;
+    quoteDisplay.innerText = `Quote: ${randomQuote.text}
+     Category: ${randomQuote.category}`;
   });
 }; // Displays the random qoute
 
 showRandomQuote();
 
-const createAddQuoteForm = () => {}; // Displays a pop up that allows users to add a qoute
+const addQuote = () => {
+  const textInput = document.getElementById("newQuoteText");
+  const categoryInput = document.getElementById("newQuoteCategory");
 
-const addQuotes = () => {}; // Adds the qoute
+  const text = textInput.value.trim();
+  const category = categoryInput.value.trim();
+
+  if (text && category) {
+    quotes.push({ text, category });
+    alert("Quote Added!");
+
+    textInput.value = "";
+    categoryInput.value = "";
+  } else {
+    alert("Please enter both the quote and category");
+  }
+
+  console.log(quotes);
+}; // Adds a new qoute
